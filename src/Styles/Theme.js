@@ -8,7 +8,7 @@ export const Theme = {
   },
   space: {
     sidePadding: "5rem",
-    headerMargin: "10rem",
+    headerMargin: "0",
   },
   breakpoints: {
     xs: "320px",
