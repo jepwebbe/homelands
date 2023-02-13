@@ -1,12 +1,20 @@
 import React from "react";
 import { HeaderStyled } from "./Styled.Header";
 import { Nav } from "./Nav";
+import { BgStyled } from "./Styled.Bg";
 
 export const Header = () => {
-
   return (
-    <HeaderStyled>
-      <Nav />
-    </HeaderStyled>
+    <>
+      <HeaderStyled>
+        <h1>HOMELANDS</h1>
+        <Nav />
+      </HeaderStyled>
+      <BgStyled>
+        <div className="headerBg"></div>
+        <div className="triangleOne"></div>
+        <div className="triangleTwo"></div>
+      </BgStyled>
+    </>
   );
 };

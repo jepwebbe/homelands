@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 
 import { useLoginStore } from "./useLoginStore";
 import { useNavigate } from "react-router-dom";
-import appService from "../App/Appservices/AppService";
+import appService from "../../App/Appservices/AppService";
 
-const Login = (forward) => {
+const Login = (forward) => { 
   // saves useNavigate in a variable to use after login
   const navigate = useNavigate();
   // destructures the custom hook to variables (and a function)

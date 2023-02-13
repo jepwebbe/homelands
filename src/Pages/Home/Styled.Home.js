@@ -7,7 +7,6 @@ export const HomeStyled = styled.section`
 }
 >div:nth-child(2) {
     grid-area: b;
-    border: 1px solid black;
 }
 >div:nth-child(3) {
     grid-area: c;

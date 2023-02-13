@@ -1,7 +1,13 @@
 // The theme object holding values that can be accessed globally by styled-components
 export const Theme = {
   colors: {
-    primaryBg: "beige",
+    primaryBg: "white",
+    orange: "#AF7627",
+    rosa: "#FED9C9",
+  },
+  space: {
+    sidePadding: "5rem",
+    headerMargin: "15rem",
   },
   breakpoints: {
     xs: "320px",
@@ -12,12 +18,12 @@ export const Theme = {
   },
   desktop: {
     rows: "auto auto 1fr auto",
-    columns: "repeat(3, 1fr)",
+    columns: "repeat(6, 1fr)",
     area: `
-    "a a a"
-    "b c c"
-    "b d d"
-    "e e e"
+    "a a a a a a"
+    "b b b b b b"
+    "c c c c c c"
+    "d d d d d d"
               `,
   },
   desktopTwo: {

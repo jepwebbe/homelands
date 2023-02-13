@@ -1,11 +1,7 @@
 import styled from "styled-components";
 
 export const NavStyled = styled.nav`
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 4rem;
-  background-color: white;
+  background-color: transparent;
   button {
     display: none;
   }
@@ -14,6 +10,14 @@ export const NavStyled = styled.nav`
     gap: 1rem;
     justify-content: center;
     padding: 0;
+    margin: 0;
+    li a {
+      font-size: 1.75rem;
+      color: white;
+    }
+  }
+  ul .active {
+    color: ${(props) => props.theme.colors.orange};
   }
   @media (max-width: ${(props) => props.theme.breakpoints.m}) {
     button {

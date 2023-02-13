@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GrClose } from "react-icons/gr";
 import { NavStyled } from "./Styled.Nav";
@@ -20,24 +20,24 @@ export const Nav = () => {
       </button>
       <ul style={{ display: burgermenu ? "flex" : "none" }}>
         <li>
-          <Link to="/" onClick={showBurgermenu}>
-            Home
-          </Link>
+          <NavLink  to="/" onClick={showBurgermenu}>
+            Forside
+          </NavLink>
         </li>
         <li>
-          <Link to="/about" onClick={showBurgermenu}>
-            About
-          </Link>
+          <NavLink  to="/boliger" onClick={showBurgermenu}>
+            Boliger til salg
+          </NavLink>
         </li>
         <li>
-          <Link to="/contact" onClick={showBurgermenu}>
-            Contact
-          </Link>
+          <NavLink  to="/login" onClick={showBurgermenu}>
+            Login
+          </NavLink>
         </li>
         <li>
-          <Link to="/products" onClick={showBurgermenu}>
-            Products
-          </Link>
+          <NavLink  to="" onClick={showBurgermenu}>
+            Søg
+          </NavLink>
         </li>
       </ul>
     </NavStyled>
