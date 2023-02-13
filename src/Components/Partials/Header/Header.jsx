@@ -7,14 +7,16 @@ export const Header = () => {
   return (
     <>
       <HeaderStyled>
-        <h1>HOMELANDS</h1>
-        <Nav />
+        <div className="navigation">
+          <h1>HOMELANDS</h1>
+          <Nav />
+        </div>
+        <BgStyled>
+          <div className="headerBg"></div>
+          <div className="triangleOne"></div>
+          <div className="triangleTwo"></div>
+        </BgStyled>
       </HeaderStyled>
-      <BgStyled>
-        <div className="headerBg"></div>
-        <div className="triangleOne"></div>
-        <div className="triangleTwo"></div>
-      </BgStyled>
     </>
   );
 };

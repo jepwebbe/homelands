@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const NavStyled = styled.nav`
   background-color: transparent;
-  button {
+  button.burgerbutton {
     display: none;
   }
   ul {
@@ -18,6 +18,31 @@ export const NavStyled = styled.nav`
   }
   ul .active {
     color: ${(props) => props.theme.colors.orange};
+  }
+  li:last-of-type {
+    align-self: center;
+    form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      input {
+        grid-column: 1 / -1;
+        grid-row: 1/-1;
+        padding: 0 0 0 5px;
+        border: none;
+        border-radius: 0.2rem;
+      }
+      button {
+        grid-column: 2 / 2;
+        grid-row: 1/-1;
+        justify-self: end;
+        width: 2rem;
+        background-color: #999999;
+        border: none;
+        cursor: pointer;
+        border-top-right-radius: 0.2rem;
+        border-bottom-right-radius: 0.2rem;
+      }
+    }
   }
   @media (max-width: ${(props) => props.theme.breakpoints.m}) {
     button {

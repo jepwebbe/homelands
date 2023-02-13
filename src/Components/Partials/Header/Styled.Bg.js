@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const BgStyled = styled.div`
+height: 100%;
 .headerBg {
     position: absolute;
     top: 0;

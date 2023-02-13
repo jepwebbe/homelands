@@ -4,10 +4,11 @@ export const Theme = {
     primaryBg: "white",
     orange: "#AF7627",
     rosa: "#FED9C9",
+    green: "#14C451"
   },
   space: {
     sidePadding: "5rem",
-    headerMargin: "15rem",
+    headerMargin: "10rem",
   },
   breakpoints: {
     xs: "320px",

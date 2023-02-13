@@ -3,6 +3,7 @@ import {  NavLink } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GrClose } from "react-icons/gr";
 import { NavStyled } from "./Styled.Nav";
+import Search from "./Search/Search";
 
 export const Nav = () => {
   // Set the burgermenu to true, if window width is larger than 768
@@ -15,7 +16,7 @@ export const Nav = () => {
   };
   return (
     <NavStyled>
-      <button onClick={showBurgermenu}>
+      <button onClick={showBurgermenu} className="burgerbutton">
         {!burgermenu ? <GiHamburgerMenu /> : <GrClose />}
       </button>
       <ul style={{ display: burgermenu ? "flex" : "none" }}>
@@ -35,9 +36,7 @@ export const Nav = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink  to="" onClick={showBurgermenu}>
-            Søg
-          </NavLink>
+         <Search />
         </li>
       </ul>
     </NavStyled>

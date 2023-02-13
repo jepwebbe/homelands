@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const HeaderStyled = styled.header`
+height: 10rem;
+div.navigation {
   position: fixed;
   top: 0;
   grid-area: header;
@@ -18,6 +20,7 @@ export const HeaderStyled = styled.header`
     font-size: 4rem;
     margin: 0;
   }
+}
 
   @media (max-width: ${(props) => props.theme.breakpoints.m}) {
   }

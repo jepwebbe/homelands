@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import appService from "../../Components/App/Appservices/AppService";
-import { RandomHousesStyled } from "./Styled.RandomHouses";
+import { HouseCardStyled } from "../../Styles/HouseCard";
 
 export const RandomHouses = () => {
   const [rans, setRans] = useState([]);
@@ -30,7 +30,7 @@ export const RandomHouses = () => {
     .slice(0, 3);
 
   return (
-    <RandomHousesStyled>
+    <HouseCardStyled columnWidth={200}>
       {randomHouses?.map((item, i) => (
         <article key={i}>
           <div className="imagewrap">
@@ -40,17 +40,17 @@ export const RandomHouses = () => {
             />
           </div>
           <h2>{item.address}</h2>
-          <p>
+          <p className="marginBottom font">
             {item.zipcode} {item.city}
           </p>
-          <p>{item.type}</p>
+          <p className="marginTop font">{item.type}</p>
           <div>
-            <div>{item.energy_label_name}</div>
+            <div><p>{item.energy_label_name}</p></div>
             <p>{item.num_rooms} værelser, {item.floor_space}m2</p>
-            <p>{formatPrice.format(item.price)}</p>
+            <p className="price">{formatPrice.format(item.price)}</p>
           </div>
         </article>
       ))}
-    </RandomHousesStyled>
+    </HouseCardStyled>
   );
 };
