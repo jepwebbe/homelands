@@ -28,9 +28,9 @@ export const Theme = {
               `,
   },
   desktopTwo: {
-    rows: "",
-    columns: "",
-    area: `
+    rows: "repeat(auto, auto)",
+    columns: "4fr 1fr",
+    area: `"a a" "b c"
               `,
   },
   tablet: {

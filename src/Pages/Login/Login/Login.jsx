@@ -63,10 +63,10 @@ const Login = (forward) => {
           <button>Login</button>
         </form>
       ) : (
-        <>
-          <h3>{username} er logget in</h3>
+        <aside>
+          <p>Du er logget ind som {username}</p>
           <button onClick={() => handleLogout()}>Log ud</button>
-        </>
+        </aside>
       )}
     </>
   );

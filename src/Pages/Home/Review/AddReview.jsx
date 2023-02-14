@@ -30,7 +30,6 @@ const AddReview = () => {
       const response = await appService.Create("reviews", postData);
       if (response.status) {
         console.log(response.data);
-        setPostID(response.data.new_id);
         reset();
       }
     } catch (error) {

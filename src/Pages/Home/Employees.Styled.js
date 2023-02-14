@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledEmployees = styled.section`
   grid-area: d;
-  padding: 0 ${(props) => props.theme.space.sidePadding};
+  padding: 2rem ${(props) => props.theme.space.sidePadding};
   h2 {
     text-align: center;
   }

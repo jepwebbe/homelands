@@ -9,7 +9,7 @@ export const Review = () => {
   const { state: reviews } = useGetApiDataFromEndpoint("reviews", "items");
   const [showAddReview, setShowAddReview] = useState(false);
   console.log("showaddreview", showAddReview);
-  const HandleClick = () => {
+  const handleClick = () => {
     showAddReview ? setShowAddReview(false) : setShowAddReview(true);
   };
   // Here, I create a new array and sort it from high to low, parsing to number before
@@ -56,9 +56,9 @@ export const Review = () => {
             {formattedDate}
           </span>
         </p>
-        {!showAddReview ? <button className="showbutton" onClick={HandleClick}>
+        {!showAddReview ? <button className="showbutton" onClick={handleClick}>
           <IoIosArrowBack />
-        </button> : <button className="hidebutton" onClick={HandleClick}>
+        </button> : <button className="hidebutton" onClick={handleClick}>
           <RxCross2 />
         </button>}
         {showAddReview && <AddReview />}
