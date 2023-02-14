@@ -4,7 +4,6 @@ import { HouseCardStyled } from "../../Styles/HouseCard";
 
 export const RandomHouses = () => {
   const [rans, setRans] = useState([]);
-  console.log("dette er rans", rans);
 
   const formatPrice = new Intl.NumberFormat("da-DK", {
     style: "currency",

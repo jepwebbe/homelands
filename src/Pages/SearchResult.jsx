@@ -17,7 +17,7 @@ const SearchResult = () => {
     <Page title="Søgeresultat">
       <SearchResultStyled>
         <h2>Din søgning</h2>
-        <HouseCardStyled columnWidth={500}>
+        <HouseCardStyled columnWidth={400}>
           {searchResults?.length > 0 ? (
             searchResults.map((item, i) => (
               <article key={i}>

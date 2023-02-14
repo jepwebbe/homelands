@@ -7,7 +7,7 @@ const useGetApiDataFromEndpoint = (endpoint, key) => {
   // using useEffect to fetch data from the props passed to the component, so it only renders when dep. array changes
   useEffect(() => {
     // it uses async to let other code run while the api request is completed
-    const renderData = async () => {
+    const renderData = async () => { 
       try {
         const response = await appService.Get(endpoint);
         // if there is a response, it sets it to state or else returns an error

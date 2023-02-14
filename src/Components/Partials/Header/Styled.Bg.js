@@ -7,7 +7,7 @@ height: 100%;
     top: 0;
     height: 3rem;
     background-color: black;
-    z-index: 1;
+    z-index: 2;
     width: 100vw;
 }
   .triangleOne {
@@ -20,6 +20,8 @@ height: 100%;
     transform: rotate(0deg);
     position: relative;
     top: 3rem;
+    z-index: 2;
+
   }
   .triangleTwo {
     display: inline-block;
@@ -31,6 +33,7 @@ height: 100%;
     border-width: 0 65vw 5rem 1rem;
     border-color: transparent black transparent transparent;
     transform: rotate(0deg);
+    z-index: 2;
 
   }
 `;
