@@ -1,5 +1,6 @@
 import React from "react";
-import useGetApiDataFromEndpoint from "../../Hooks/useGetApiDataFromEndpoint";
+import useGetApiDataFromEndpoint from "../../../Hooks/useGetApiDataFromEndpoint";
+import AddReview from "./AddReview";
 import { StyledReview } from "./Review.Styled";
 
 export const Review = () => {
@@ -50,6 +51,7 @@ export const Review = () => {
           </span>
         </p>
       </article>
+      <AddReview />
     </StyledReview>
   );
 };

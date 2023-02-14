@@ -1,7 +1,7 @@
 import React from "react";
 import useGetApiDataFromEndpoint from "../../Hooks/useGetApiDataFromEndpoint";
 import { Page } from "../../Styles/PageTemplate/Page";
-import { Review } from "./Review";
+import { Review } from "./Review/Review";
 import { Employees } from "./Employees";
 import Hero from "./Hero/Hero";
 import { RandomHouses } from "./RandomHouses";
