@@ -5,9 +5,9 @@ import appService from "../../../Components/App/Appservices/AppService";
 import { useLoginStore } from "../../Login/Login/useLoginStore";
 import { StyledAddReview } from "./AddReview.Styled";
 
-const AddReview = ({}) => {
+const AddReview = () => {
   const { loggedIn, userInfo } = useLoginStore();
-  const [postID, setPostID] = useState();
+  const [ setPostID] = useState();
   
   // Destructure form methods from useForm
   const {

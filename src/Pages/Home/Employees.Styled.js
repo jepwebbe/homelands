@@ -16,15 +16,12 @@ export const StyledEmployees = styled.section`
       padding: 0 0.5rem;
       border: 1px solid black;
       display: grid;
-
-      a {
+      img {
+        max-height: 15rem;
+        margin: 0 auto;
         grid-area: 1 / 1 / -1 / -1;
-        cursor: pointer;
-        img {
-          max-height: 15rem;
-          margin: 0 auto;
-        }
       }
+
       > div {
         grid-area: 1 / 1 / -1 / -1;
         align-self: end;

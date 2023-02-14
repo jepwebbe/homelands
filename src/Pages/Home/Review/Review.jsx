@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import useGetApiDataFromEndpoint from "../../../Hooks/useGetApiDataFromEndpoint";
 import AddReview from "./AddReview";
 import { StyledReview } from "./Review.Styled";
+import { IoIosArrowBack } from "react-icons/io";
+import { RxCross2 } from "react-icons/rx"
 
 export const Review = () => {
   const { state: reviews } = useGetApiDataFromEndpoint("reviews", "items");
-  // First sort the
+  const [showAddReview, setShowAddReview] = useState(false);
+  console.log("showaddreview", showAddReview);
+  const HandleClick = () => {
+    showAddReview ? setShowAddReview(false) : setShowAddReview(true);
+  };
   // Here, I create a new array and sort it from high to low, parsing to number before
   const sortedReviews = reviews.sort(
     (a, b) => parseInt(b.num_stars, 10) - parseInt(a.num_stars, 10)
@@ -18,7 +24,7 @@ export const Review = () => {
   const ranTopReview =
     topReviews[Math.floor(Math.random() * topReviews.length)];
   console.log("random er", ranTopReview);
-// First convert the Unix timestamp 
+  // First convert the Unix timestamp
   const time = ranTopReview?.created;
   const date = new Date(time * 1000);
   const months = [
@@ -50,8 +56,13 @@ export const Review = () => {
             {formattedDate}
           </span>
         </p>
+        {!showAddReview ? <button className="showbutton" onClick={HandleClick}>
+          <IoIosArrowBack />
+        </button> : <button className="hidebutton" onClick={HandleClick}>
+          <RxCross2 />
+        </button>}
+        {showAddReview && <AddReview />}
       </article>
-      <AddReview />
     </StyledReview>
   );
 };
