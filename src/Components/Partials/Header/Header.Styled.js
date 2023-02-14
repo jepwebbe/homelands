@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HeaderStyled = styled.header`
+export const StyledHeader = styled.header`
 height: 8rem;
 div.navigation {
   position: fixed;

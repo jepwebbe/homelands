@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SearchResultStyled = styled.section`
+export const StyledSearchResult = styled.section`
   margin-top: ${(props) => props.theme.space.headerMargin};
   h2 {
     grid-area: a;

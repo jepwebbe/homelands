@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import appService from "../../Components/App/Appservices/AppService";
-import { HouseCardStyled } from "../../Styles/HouseCard";
+import { StyledHouseCard } from "../../Styles/HouseCard.Styled";
 
 export const RandomHouses = () => {
   const [rans, setRans] = useState([]);
@@ -29,7 +29,7 @@ export const RandomHouses = () => {
     .slice(0, 3);
 
   return (
-    <HouseCardStyled columnWidth={200}>
+    <StyledHouseCard columnWidth={200}>
       {randomHouses?.map((item, i) => (
         <article key={i}>
           <div className="imagewrap">
@@ -50,6 +50,6 @@ export const RandomHouses = () => {
           </div>
         </article>
       ))}
-    </HouseCardStyled>
+    </StyledHouseCard>
   );
 };

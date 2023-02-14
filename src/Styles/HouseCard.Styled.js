@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const HouseCardStyled = styled.div`
-  padding: 0 ${(props) => props.theme.space.sidePadding};
+export const StyledHouseCard = styled.div`
+padding: 0 ${props => props.theme.space.sidePadding};
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(${props => props.columnWidth}px, 1fr));
   gap: 2rem;

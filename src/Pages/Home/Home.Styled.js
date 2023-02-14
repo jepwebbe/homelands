@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
-export const HomeStyled = styled.section`
+export const StyledHome = styled.section`
+
 >div:nth-child(1) {
     grid-area: a;
     border: 1px solid black;

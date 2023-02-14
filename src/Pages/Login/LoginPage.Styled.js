@@ -1,5 +1,5 @@
 import styled from 'styled-components'
 
-export const LoginPageStyled = styled.section`
+export const StyledLoginPage = styled.section`
 margin-top: ${props => props.theme.space.headerMargin};
 `

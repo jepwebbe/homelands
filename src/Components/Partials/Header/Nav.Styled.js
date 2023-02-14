@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NavStyled = styled.nav`
+export const StyledNav = styled.nav`
   background-color: transparent;
   button.burgerbutton {
     display: none;

@@ -37,10 +37,10 @@ export const Theme = {
     rows: "auto auto 1fr auto",
     columns: "repeat(2, auto)",
     area: `
-      "a b"
+      "a a"
+      "b b"
       "c c"
       "d d"
-      "e e"
               `,
   },
   tabletTwo: {
@@ -57,7 +57,6 @@ export const Theme = {
       "b b"
       "c c"
       "d d"
-      "e e"
               `,
   },
   mobileTwo: {

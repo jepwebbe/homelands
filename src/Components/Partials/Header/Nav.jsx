@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {  NavLink } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GrClose } from "react-icons/gr";
-import { NavStyled } from "./Styled.Nav";
+import { StyledNav } from "./Nav.Styled";
 import Search from "./Search/Search";
 
 export const Nav = () => {
@@ -15,7 +15,7 @@ export const Nav = () => {
     setBurgermenu(!burgermenu)};
   };
   return (
-    <NavStyled>
+    <StyledNav>
       <button onClick={showBurgermenu} className="burgerbutton">
         {!burgermenu ? <GiHamburgerMenu /> : <GrClose />}
       </button>
@@ -39,6 +39,6 @@ export const Nav = () => {
          <Search />
         </li>
       </ul>
-    </NavStyled>
+    </StyledNav>
   );
 };

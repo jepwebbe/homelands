@@ -1,12 +1,12 @@
 import React from "react";
 import { useSearchResultsStore } from "../Components/Partials/Header/Search/useSearchResultStore";
-import { HouseCardStyled } from "../Styles/HouseCard";
+import { StyledHouseCard } from "../Styles/HouseCard.Styled";
 import { Page } from "../Styles/PageTemplate/Page";
-import { SearchResultStyled } from "./Styled.SearchResult";
+import { StyledSearchResult } from "./SearchResult.Styled";
 
 const SearchResult = () => {
   const { searchResults } = useSearchResultsStore();
-  console.log("søgeresult", searchResults)
+  console.log("søgeresult", searchResults);
 
   const formatPrice = new Intl.NumberFormat("da-DK", {
     style: "currency",
@@ -15,9 +15,11 @@ const SearchResult = () => {
   });
   return (
     <Page title="Søgeresultat">
-      <SearchResultStyled>
+      <StyledSearchResult>
         <h2>Din søgning</h2>
-        <HouseCardStyled columnWidth={400}>
+        <StyledHouseCard
+          columnWidth={400}
+        >
           {searchResults?.length > 0 ? (
             searchResults.map((item, i) => (
               <article key={i}>
@@ -46,8 +48,8 @@ const SearchResult = () => {
           ) : (
             <p>Din søgning gav ingen resultater</p>
           )}
-        </HouseCardStyled>
-      </SearchResultStyled>
+        </StyledHouseCard>
+      </StyledSearchResult>
     </Page>
   );
 };
