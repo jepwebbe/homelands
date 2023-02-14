@@ -8,12 +8,16 @@ import { StyledAddReview } from "./AddReview.Styled";
 const AddReview = ({}) => {
   const { loggedIn, userInfo } = useLoginStore();
   const [postID, setPostID] = useState();
+  
+  // Destructure form methods from useForm
   const {
-    register,
-    handleSubmit,
+    register, // register input with validation
+    handleSubmit, // handle the form submit
     reset,
-    formState: { errors },
+    formState: { errors }, // form errors
   } = useForm();
+
+  // Submits the data from the form to the properties required by the api
   const onSubmit = async (data) => {
     const postData = {
       title: data.title,
