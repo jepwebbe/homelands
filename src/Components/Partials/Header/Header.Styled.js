@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const StyledHeader = styled.header`
 height: 8rem;
+grid-area: header;
 div.navigation {
-  position: fixed;
+  position: absolute;
   top: 0;
-  grid-area: header;
   z-index: 10;
   width: 100vw;
   display: flex;
