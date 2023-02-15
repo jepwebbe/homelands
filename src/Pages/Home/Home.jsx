@@ -17,7 +17,7 @@ const imageData = heroImages.map(item => {
   return (
     <Page title="Hjem" description="Dette er hjem">
       <StyledHome>
-        <Hero slides={imageData}  />
+        <Hero slides={imageData} ratio={21/7} btnColor={"grey"}/>
         <RandomHouses />
         <Review />
         <Employees />

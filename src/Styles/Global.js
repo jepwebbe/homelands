@@ -17,6 +17,8 @@ export const GlobalStyles = createGlobalStyle`
     font-family: "Trebuc";
     src: local("Trebuc"),
     url(${Trebuc}) format('truetype');
+    font-weight: 100;
+
 }
 @font-face {
     font-family: "Trebuc";
@@ -50,6 +52,7 @@ body {
     height: 100%;
     margin: 0 auto;
     font-family: "Trebuc";
+    font-weight: 100;
 }
 #root {
     height: 100%;

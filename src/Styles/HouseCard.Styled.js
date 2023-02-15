@@ -1,9 +1,12 @@
 import styled from "styled-components";
 
 export const StyledHouseCard = styled.div`
-padding: 0 ${props => props.theme.space.sidePadding};
+  padding: 0 ${(props) => props.theme.space.sidePadding};
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(${props => props.columnWidth}px, 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(${(props) => props.columnWidth}px, 1fr)
+  );
   gap: 2rem;
   article {
     padding: 1rem;
@@ -20,16 +23,16 @@ padding: 0 ${props => props.theme.space.sidePadding};
       font-weight: normal;
     }
     p {
-        font-size: 1.15rem;
+      font-size: 1.15rem;
     }
     .marginBottom {
-        margin-bottom: 0;
+      margin-bottom: 0;
     }
     .marginTop {
-        margin-top: 0;
+      margin-top: 0;
     }
     .font {
-        font-size: 0.8rem;
+      font-size: 0.8rem;
     }
     div:last-of-type {
       display: flex;
@@ -39,8 +42,8 @@ padding: 0 ${props => props.theme.space.sidePadding};
         padding: 0;
       }
       .price {
-          margin-left: auto;
-        }
+        margin-left: auto;
+      }
       > div {
         background-color: ${(props) => props.theme.colors.green};
         width: 1.6rem;
@@ -52,7 +55,6 @@ padding: 0 ${props => props.theme.space.sidePadding};
           color: white;
           text-align: center;
         }
-
       }
     }
   }

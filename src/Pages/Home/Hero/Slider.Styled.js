@@ -24,7 +24,7 @@ export const StyledHeading = styled.div`
   }
   .leftArrow {
     grid-area: left;
-    color: grey;
+    color: ${props => props.buttonColor};
     transform: scale(2);
     margin-left: 2rem;
     cursor: pointer;
@@ -32,7 +32,7 @@ export const StyledHeading = styled.div`
   .rightArrow {
     grid-area: right;
     justify-self: end;
-    color: grey;
+    color: ${props => props.buttonColor};
     transform: scale(2);
     margin-right: 2rem;
     cursor: pointer;
@@ -44,7 +44,7 @@ export const SlideImage = styled.img`
 `;
 
 export const ImageWrap = styled.div`
-aspect-ratio: 21/9;
+aspect-ratio: ${props => props.aspectRatio};
 overflow: hidden;
 `
 

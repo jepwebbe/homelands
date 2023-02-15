@@ -3,10 +3,19 @@ import { useParams } from "react-router-dom";
 import appService from "../../Components/App/Appservices/AppService";
 import { PageThree } from "../../Styles/PageTemplate/PageThree";
 import { StyledHouseDetails } from "./HouseDetails.Styled";
+import { AiFillCamera, AiOutlineHeart } from "react-icons/ai";
+import { IoMdPin } from "react-icons/io";
+import floorplan from "../../assets/FloorplanIcon.png";
+import { useModalStore } from "./Modal/useModalStore";
+import Hero from "../Home/Hero/Hero";
 
 const HousesDetails = () => {
+  const { setModalPayload, modalPayload } = useModalStore();
+  console.log("modalpayload", modalPayload);
   const [houseDetails, setHouseDetails] = useState({});
+
   const { id } = useParams();
+  // fetch the home from the id in the url
   useEffect(() => {
     const getData = async () => {
       try {
@@ -18,8 +27,31 @@ const HousesDetails = () => {
     };
     getData();
   }, [id]);
+  // posts a favorite onClick (not working)
+  const postFavorite = (id) => {
+    const add = async () => {
+      try {
+        console.log("id er ", id);
 
-  console.log("housedetails", houseDetails);
+        const result = await appService.Create("favorites", { home_id: id });
+        console.log("postFav", result.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    add();
+  };
+  // const { state: favorites } = useGetApiDataFromEndpoint("favorites");
+  // console.log("favoritter", favorites);
+
+  // Images for the modal gallery
+  const imageData = houseDetails?.images?.map((item) => {
+    return item.filename.medium;
+  });
+  // onClick function for the map to the modal
+  const getMap = (address, city) => {
+    return
+  };
   return (
     <PageThree title={`Homelands: ${houseDetails?.address}`}>
       <StyledHouseDetails>
@@ -36,11 +68,45 @@ const HousesDetails = () => {
               {houseDetails?.zipcode} {houseDetails?.city}
             </p>
             <p>
-              {houseDetails?.type} | {houseDetails.floo_space} |{" "}
-              {houseDetails?.num_rooms}
+              {houseDetails?.type} | {houseDetails.floor_space}m2 |{" "}
+              {houseDetails?.num_rooms} værelser
             </p>
           </div>
-          <div>b</div>
+          <div>
+            <div>
+              <AiFillCamera
+                onClick={() =>
+                  setModalPayload(<Hero btnColor="white" slides={imageData} />)
+                }
+              />
+            </div>
+            <div>
+              <button
+                onClick={() =>
+                  setModalPayload(
+                    <img
+                      src={houseDetails?.floorplan}
+                      alt="Grundplan for huset"
+                    />
+                  )
+                }
+              >
+                <img src={floorplan} alt="Billede af grundplan" />
+              </button>
+            </div>
+            <div>
+              <IoMdPin
+                onClick={() =>
+                  setModalPayload(() =>
+                    getMap(houseDetails?.address, houseDetails?.city)
+                  )
+                }
+              />
+            </div>
+            <div>
+              <AiOutlineHeart onClick={() => postFavorite(houseDetails.id)} />
+            </div>
+          </div>
           <div>
             <p className="price">
               Kontantpris <span>{houseDetails?.price}</span>
@@ -87,7 +153,7 @@ const HousesDetails = () => {
           <div>{houseDetails?.description}</div>
           <div>
             <article>
-                <h3>Kontakt</h3>
+              <h3>Kontakt</h3>
               <img
                 src={houseDetails?.staff?.image}
                 alt={`Et billede af ${houseDetails?.staff?.firstname}`}
