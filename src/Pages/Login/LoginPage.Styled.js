@@ -34,6 +34,7 @@ export const StyledLoginPage = styled.section`
       button.delete {
         color: #FF0000;
       }
+
     }
   }
   aside button, form button {

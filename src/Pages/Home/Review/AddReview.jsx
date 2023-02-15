@@ -29,7 +29,6 @@ const AddReview = () => {
     try {
       const response = await appService.Create("reviews", postData);
       if (response.status) {
-        console.log(response.data);
         reset();
       }
     } catch (error) {

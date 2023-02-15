@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { StyledGrid } from "./Styled.PageTwo";
+import { StyledGrid } from "./Styled.PageThree";
 
-const PageTwo = (props) => {
+const PageThree = (props) => {
   // Destructuring props object to extract the children, title, description, and subtitle properties
   const { children, title, description } = props;
   // Using useEffect  to update the document title and description whenever they change
@@ -18,4 +18,4 @@ const PageTwo = (props) => {
   return <StyledGrid> {children} </StyledGrid>;
 };
 
-export { PageTwo };
+export { PageThree };

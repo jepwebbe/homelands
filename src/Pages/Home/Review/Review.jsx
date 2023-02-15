@@ -3,12 +3,11 @@ import useGetApiDataFromEndpoint from "../../../Hooks/useGetApiDataFromEndpoint"
 import AddReview from "./AddReview";
 import { StyledReview } from "./Review.Styled";
 import { IoIosArrowBack } from "react-icons/io";
-import { RxCross2 } from "react-icons/rx"
+import { RxCross2 } from "react-icons/rx";
 
 export const Review = () => {
   const { state: reviews } = useGetApiDataFromEndpoint("reviews", "items");
   const [showAddReview, setShowAddReview] = useState(false);
-  console.log("showaddreview", showAddReview);
   const handleClick = () => {
     showAddReview ? setShowAddReview(false) : setShowAddReview(true);
   };
@@ -23,7 +22,6 @@ export const Review = () => {
   // And here i extract a single random comment to display
   const ranTopReview =
     topReviews[Math.floor(Math.random() * topReviews.length)];
-  console.log("random er", ranTopReview);
   // First convert the Unix timestamp
   const time = ranTopReview?.created;
   const date = new Date(time * 1000);
@@ -56,11 +54,15 @@ export const Review = () => {
             {formattedDate}
           </span>
         </p>
-        {!showAddReview ? <button className="showbutton" onClick={handleClick}>
-          <IoIosArrowBack />
-        </button> : <button className="hidebutton" onClick={handleClick}>
-          <RxCross2 />
-        </button>}
+        {!showAddReview ? (
+          <button className="showbutton" onClick={handleClick}>
+            <IoIosArrowBack />
+          </button>
+        ) : (
+          <button className="hidebutton" onClick={handleClick}>
+            <RxCross2 />
+          </button>
+        )}
         {showAddReview && <AddReview />}
       </article>
     </StyledReview>

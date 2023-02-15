@@ -33,6 +33,12 @@ export const Theme = {
     area: `"a a" "b c"
               `,
   },
+  desktopThree: {
+    rows: "auto 1fr",
+    columns: "4fr 1fr",
+    area: `"a a" "b b"
+              `,
+  },
   tablet: {
     rows: "auto auto 1fr auto",
     columns: "repeat(2, auto)",

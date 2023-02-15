@@ -22,7 +22,7 @@ export const RandomHouses = () => {
     };
     getData();
   }, [setRans]);
-  // Here I create a new array with the slice, then sorts it randomly and then slices it the first 3
+  // Here I create a new array with the slice, then sort it randomly and then slices it the first 3
   const randomHouses = rans
     .slice()
     .sort(() => 0.5 - Math.random())
