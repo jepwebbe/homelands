@@ -18,10 +18,13 @@ const HousesDetails = () => {
   const { id } = useParams();
 
   // Setting up variables and setter functions for useState
-  const [favorites, setFavorites] = useState([]);
   const [houseDetails, setHouseDetails] = useState({});
 
-  // If user is logged in, it fetches favorites. Rerenders when loggedIn or favorites changes
+  // only used to rerender fetch of favorites
+  const [favoritesCount, setFavoritesCount] = useState(0);
+  const [favorites, setFavorites] = useState([]);
+
+  // If user is logged in, it fetches favorites. Rerenders when loggedIn or favoritesCount changes
   // to change appearance of favorite-icon
   useEffect(() => {
     if (loggedIn) {
@@ -29,14 +32,13 @@ const HousesDetails = () => {
         try {
           const result = await appService.Get("favorites");
           setFavorites(result.data.items);
-          console.log(result.data.items);
         } catch (error) {
           console.error(error);
         }
       };
       getData();
     }
-  }, [loggedIn, favorites]);
+  }, [loggedIn, favoritesCount]);
 
   // fetch the house from the id in the url using useParams and set to state variable
   useEffect(() => {
@@ -55,8 +57,8 @@ const HousesDetails = () => {
   const postFavorite = (home_id) => {
     const add = async () => {
       try {
-        console.log("id er ", home_id);
         const result = await appService.Create("favorites", { home_id });
+        setFavoritesCount(+1)
       } catch (error) {
         console.error(error);
       }
@@ -67,8 +69,8 @@ const HousesDetails = () => {
   const deleteFavorite = (home_id) => {
     const remove = async () => {
       try {
-        console.log("id er ", home_id);
         const result = await appService.Remove("favorites", home_id);
+        setFavoritesCount(-1)
       } catch (error) {
         console.error(error);
       }

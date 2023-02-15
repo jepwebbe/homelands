@@ -58,4 +58,7 @@ export const StyledHouseCard = styled.div`
       }
     }
   }
+  a {
+    color: black;
+  }
 `;
