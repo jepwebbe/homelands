@@ -5,11 +5,14 @@ import { PageTwo } from "../../Styles/PageTemplate/PageTwo";
 import { StyledLoginPage } from "./LoginPage.Styled";
 import appService from "../../Components/App/Appservices/AppService";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 export const LoginPage = () => {
-  const { loggedIn, username } = useLoginStore();
   const [allReviews, setAllReviews] = useState([]);
   const [deleteCount, setDeleteCount] = useState(0);
+
+  // Destructuring of needed hooks
+  const { loggedIn, username } = useLoginStore();
   const { userInfo } = useLoginStore();
   const {
     register, // register input with validation
@@ -18,6 +21,14 @@ export const LoginPage = () => {
     formState: { errors }, // form errors
   } = useForm();
 
+  // Boolean state to show-hide the edit box via the toggle arrow function
+  const [displayEdit, setDisplayEdit] = useState(false);
+  const toggleEdit = () => {
+    displayEdit ? setDisplayEdit(false) : setDisplayEdit(true);
+  };
+
+  // fetch usin appservice axios the reviews and set them to allReviews
+  // rerenders whenever deleteCount is run (is is changed when a a comment has been deleted)
   useEffect(() => {
     const getData = async () => {
       try {
@@ -30,12 +41,16 @@ export const LoginPage = () => {
     getData();
   }, [deleteCount]);
 
+  // Filter out all reviews made by logged in user in new variable
+  // parses the user_Id to an integer first
   const myReviews =
     loggedIn &&
     allReviews.filter(
       (item) => parseInt(item.user_id, 10) === userInfo.user_id
     );
 
+  // Updates the comment (currently not functional)
+  // Posts postData to the endpoint w. the commentId (postData.Id)
   const onSubmit = async (data) => {
     const postData = {
       content: data.comment,
@@ -56,6 +71,9 @@ export const LoginPage = () => {
       console.error(error);
     }
   };
+
+  // Deletes a given comment and sets it to a variable deleteCount
+  // which onchange rerenders the fetch of comments
   const deleteComment = async (id) => {
     try {
       await appService.Remove("reviews", id);
@@ -64,72 +82,96 @@ export const LoginPage = () => {
       console.error(error);
     }
   };
-  const [displayEdit, setDisplayEdit] = useState(false);
-  const toggleEdit = () => {
-    displayEdit ? setDisplayEdit(false) : setDisplayEdit(true);
-  };
+
+  // State and fetch to display houses favorited when logged in
+  const [favorites, setFavorites] = useState([]);
+  useEffect(() => {
+    if (loggedIn) {
+    const getData = async () => {
+      try {
+        const result = await appService.Get("favorites");
+        setFavorites(result.data.items);
+        console.log(result.data.items)
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getData();
+  }
+  }, [loggedIn]);
+
   return (
-    <PageTwo title={username + " er logget ind"}>
+    <PageTwo title={loggedIn ? username + " er logget ind" : "Log ind på din profil" }>
       <StyledLoginPage>
         <h2>Administration</h2>
         {loggedIn ? (
-          <section>
-            <h3>Anmeldelser</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th>Titel</th>
-                  <th>Dato</th>
-                  <th>Handling</th>
-                </tr>
-              </thead>
-              <tbody>
-                {myReviews.map((item, i) => (
-                  <React.Fragment key={i}>
-                    <tr>
-                      <td>{item.title}</td>
-                      <td>{item.created}</td>
-                      <td>
-                        <button onClick={() => toggleEdit()} className="edit">
-                          Rediger
-                        </button>
-                        <button
-                          onClick={() => deleteComment(item.id)}
-                          className="delete"
-                        >
-                          Slet
-                        </button>
-                      </td>
-                    </tr>
-                    {displayEdit ? (
-                      <tr className="edit">
+          <>
+            <section>
+              <h3>Anmeldelser</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Titel</th>
+                    <th>Dato</th>
+                    <th>Handling</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {myReviews.map((item, i) => (
+                    <React.Fragment key={i}>
+                      <tr>
+                        <td>{item.title}</td>
+                        <td>{item.created}</td>
                         <td>
-                          <form onSubmit={handleSubmit(onSubmit)}>
-                            <input
-                              type="hidden"
-                              {...register("id")}
-                              id="id"
-                              value={item.id}
-                            />
-                            <textarea
-                              value={item.content}
-                              type="text"
-                              {...register("comment", { required: true })}
-                            />
-                            <input
-                              className="submit"
-                              type="submit"
-                              value="Send"
-                            />
-                          </form>
+                          <button onClick={() => toggleEdit()} className="edit">
+                            Rediger
+                          </button>
+                          <button
+                            onClick={() => deleteComment(item.id)}
+                            className="delete"
+                          >
+                            Slet
+                          </button>
                         </td>
                       </tr>
-                    ) : null}
-                  </React.Fragment>
-                ))}
-              </tbody>
-            </table>
-          </section>
+                      {displayEdit ? (
+                        <tr className="edit">
+                          <td>
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                              <input
+                                type="hidden"
+                                {...register("id")}
+                                id="id"
+                                value={item.id}
+                              />
+                              <textarea
+                                value={item.content}
+                                type="text"
+                                {...register("comment", { required: true })}
+                              />
+                              <input
+                                className="submit"
+                                type="submit"
+                                value="Send"
+                              />
+                            </form>
+                          </td>
+                        </tr>
+                      ) : null}
+                    </React.Fragment>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+            <article>
+              <h3>Favoritter</h3>
+              {favorites && favorites.map((fav, ix) => (
+                <Link key={ix} to={`/boliger/${fav.home_id}`}>
+                  <h4>{fav.address}</h4>
+                </Link>
+              ))}
+            </article>
+          </>
         ) : (
           <p>Du er ikke logget ind</p>
         )}

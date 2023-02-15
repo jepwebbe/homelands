@@ -1,21 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import appService from "../../Components/App/Appservices/AppService";
 import { PageThree } from "../../Styles/PageTemplate/PageThree";
 import { StyledHouseDetails } from "./HouseDetails.Styled";
-import { AiFillCamera, AiOutlineHeart } from "react-icons/ai";
+import { AiFillCamera, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { IoMdPin } from "react-icons/io";
 import floorplan from "../../assets/FloorplanIcon.png";
 import { useModalStore } from "./Modal/useModalStore";
 import Hero from "../Home/Hero/Hero";
+import { useLoginStore } from "../Login/Login/useLoginStore";
+// iFrame needs an Google API key to work
 
 const HousesDetails = () => {
+  // Destructuring of hooks
   const { setModalPayload, modalPayload } = useModalStore();
-  console.log("modalpayload", modalPayload);
+  const { loggedIn } = useLoginStore();
+  const { id } = useParams();
+
+  // Setting up variables and setter functions for useState
+  const [favorites, setFavorites] = useState([]);
   const [houseDetails, setHouseDetails] = useState({});
 
-  const { id } = useParams();
-  // fetch the home from the id in the url
+  // If user is logged in, it fetches favorites. Rerenders when loggedIn or favorites changes
+  // to change appearance of favorite-icon
+  useEffect(() => {
+    if (loggedIn) {
+      const getData = async () => {
+        try {
+          const result = await appService.Get("favorites");
+          setFavorites(result.data.items);
+          console.log(result.data.items);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      getData();
+    }
+  }, [loggedIn, favorites]);
+
+  // fetch the house from the id in the url using useParams and set to state variable
   useEffect(() => {
     const getData = async () => {
       try {
@@ -27,31 +50,37 @@ const HousesDetails = () => {
     };
     getData();
   }, [id]);
-  // posts a favorite onClick (not working)
-  const postFavorite = (id) => {
+
+  // posts a favorite onClick
+  const postFavorite = (home_id) => {
     const add = async () => {
       try {
-        console.log("id er ", id);
-
-        const result = await appService.Create("favorites", { home_id: id });
-        console.log("postFav", result.data);
+        console.log("id er ", home_id);
+        const result = await appService.Create("favorites", { home_id });
       } catch (error) {
         console.error(error);
       }
     };
     add();
   };
-  // const { state: favorites } = useGetApiDataFromEndpoint("favorites");
-  // console.log("favoritter", favorites);
+  // removes favorite onClick
+  const deleteFavorite = (home_id) => {
+    const remove = async () => {
+      try {
+        console.log("id er ", home_id);
+        const result = await appService.Remove("favorites", home_id);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    remove();
+  };
 
-  // Images for the modal gallery
+  // Mapped out images for the modal gallery
   const imageData = houseDetails?.images?.map((item) => {
     return item.filename.medium;
   });
-  // onClick function for the map to the modal
-  const getMap = (address, city) => {
-    return
-  };
+
   return (
     <PageThree title={`Homelands: ${houseDetails?.address}`}>
       <StyledHouseDetails>
@@ -97,14 +126,30 @@ const HousesDetails = () => {
             <div>
               <IoMdPin
                 onClick={() =>
-                  setModalPayload(() =>
-                    getMap(houseDetails?.address, houseDetails?.city)
+                  setModalPayload(
+                    <iframe
+                      src={`https://www.google.com/maps/place?q=${
+                        houseDetails?.city + houseDetails?.address
+                      }`}
+                      width="600"
+                      height="450"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
                   )
                 }
               />
             </div>
             <div>
-              <AiOutlineHeart onClick={() => postFavorite(houseDetails.id)} />
+              {favorites?.find((item) => item.home_id === houseDetails.id) ? (
+                <AiFillHeart onClick={() => deleteFavorite(houseDetails.id)} />
+              ) : loggedIn ? (
+                <AiOutlineHeart onClick={() => postFavorite(houseDetails.id)} />
+              ) : (
+                <Link to="/login">
+                  <AiOutlineHeart />
+                </Link>
+              )}
             </div>
           </div>
           <div>

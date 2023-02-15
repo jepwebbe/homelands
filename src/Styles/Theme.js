@@ -28,9 +28,9 @@ export const Theme = {
               `,
   },
   desktopTwo: {
-    rows: "repeat(auto, auto)",
+    rows: "auto 1fr auto",
     columns: "4fr 1fr",
-    area: `"a a" "b c"
+    area: `"a a" "b c" "d d"
               `,
   },
   desktopThree: {

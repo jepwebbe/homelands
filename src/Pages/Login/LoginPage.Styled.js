@@ -37,12 +37,19 @@ export const StyledLoginPage = styled.section`
 
     }
   }
+  article {
+    grid-area: d;
+  }
+  aside{
+    grid-area: c;
+  }
   aside button, form button {
         background-color: #000000;
         border: none;
         color: white;
         border-radius: 0.5rem;
         padding: 0.8rem 1.2rem;
+        cursor: pointer;
     }
   
 `;
