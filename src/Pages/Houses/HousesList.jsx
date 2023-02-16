@@ -9,10 +9,13 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useLoginStore } from "../Login/Login/useLoginStore";
 
 export const HousesList = () => {
+  // Setting up state variables and setter functions
   const [houseList, setHouseList] = useState([]);
   const [favoritesCount, setFavoritesCount] = useState(0);
   const [favorites, setFavorites] = useState([]);
+  const [selectedType, setSelectedType] = useState("");
 
+  //Destructuring custom hook
   const { loggedIn } = useLoginStore();
 
   // If user is logged in, it fetches favorites. Rerenders when loggedIn or favoritesCount changes
@@ -30,7 +33,6 @@ export const HousesList = () => {
       getData();
     }
   }, [loggedIn, favoritesCount]);
-  console.log(favorites);
 
   // fetches all the homes and sets to state
   // rerenders when a favorite has been toggled cf. dep. array
@@ -89,15 +91,42 @@ export const HousesList = () => {
     };
     remove();
   };
+
+  // First variable sorts the houseList array after the type selected in the dropdown
+  // second variable is a simple ternary that sets to the filtered, if it is longer than 0
+  const filteredHouseList = selectedType
+    ? houseList.filter((house) => house.type === selectedType)
+    : houseList;
+  const shownList =
+    filteredHouseList.length > 0 ? filteredHouseList : houseList;
   return (
     <Page
       title={`Homelands - alle vores huse`}
       description={`En fuldstændig liste over alle de huse, vi har til salg`}
     >
       <StyledHousesList>
-        <h2>Boliger til salg</h2>
+        <div>
+          <h2>Boliger til salg</h2>
+          <div>
+            {/* The code below is snatched from the internet. 
+            "It creates an array of unique types from the houseList and map over them to create options" */}
+            <select
+              value={selectedType}
+              onChange={(e) => setSelectedType(e.target.value)}
+            >
+              <option value="">Sorter efter type</option>
+              {[...new Set(houseList.map((house) => house.type))].map(
+                (type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                )
+              )}
+            </select>
+          </div>
+        </div>
         <StyledHouseCard columnWidth={300}>
-          {houseList?.map((item, i) => (
+          {shownList?.map((item, i) => (
             <Link key={i} to={item.id}>
               <article>
                 <div className="imagewrap">
