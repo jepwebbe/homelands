@@ -24,4 +24,11 @@ export const StyledHousesList = styled.section`
       color: black;
     }
   }
+  @media (max-width: ${(props) => props.theme.breakpoints.m}) {
+    margin-top: 1.5rem;
+  > div:nth-child(1) {
+    justify-content: center;
+    gap: 1rem;
+  }
+  }
 `;
