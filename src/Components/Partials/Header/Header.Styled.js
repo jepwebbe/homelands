@@ -37,6 +37,9 @@ button.burgerbutton {
       padding: 0.5rem;
       height: 4rem;
       width: 15rem;
+      a {
+        color: white;
+      }
     }
     button.burgerbutton {
       display: block;

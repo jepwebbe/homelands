@@ -2,12 +2,13 @@ import React from "react";
 import { StyledHeader } from "./Header.Styled";
 import { Nav } from "./Nav";
 import { StyledBg } from "./Bg.Styled";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   return (
       <StyledHeader>
         <div className="navigation">
-          <h1>HOMELANDS</h1>
+          <h1><Link to="/">HOMELANDS</Link></h1>
           <Nav />
         </div>
         <StyledBg>

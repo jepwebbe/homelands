@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useSearchResultsStore } from "../Components/Partials/Header/Search/useSearchResultStore";
 import { StyledHouseCard } from "../Styles/HouseCard.Styled";
 import { Page } from "../Styles/PageTemplate/Page";
@@ -17,19 +18,19 @@ const SearchResult = () => {
     <Page title="Søgeresultat">
       <StyledSearchResult>
         <h2>Din søgning</h2>
-        <StyledHouseCard
-          columnWidth={400}
-        >
+        <StyledHouseCard columnWidth={400}>
           {searchResults?.length > 0 ? (
             searchResults.map((item, i) => (
               <article key={i}>
                 <div className="imagewrap">
-                  <img
-                    src={item.images[0].filename.medium}
-                    alt={"et billede af" + item.address}
-                  />
+                  <Link to={`/boliger/${item.id}`}>
+                    <img
+                      src={item.images[0].filename.medium}
+                      alt={"et billede af" + item.address}
+                    />
+                  </Link>
                 </div>
-                <h2>{item.address}</h2>
+                <h3>{item.address}</h3>
                 <p className="marginBottom font">
                   {item.zipcode} {item.city}
                 </p>

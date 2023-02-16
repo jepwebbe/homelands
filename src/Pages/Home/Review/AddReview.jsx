@@ -7,7 +7,6 @@ import { StyledAddReview } from "./AddReview.Styled";
 
 const AddReview = () => {
   const { loggedIn, userInfo } = useLoginStore();
-  const [ setPostID] = useState();
   
   // Destructure form methods from useForm
   const {

@@ -30,7 +30,7 @@ export const RandomHouses = () => {
     .slice(0, 3);
 
   return (
-    <StyledHouseCard columnWidth={200}>
+    <StyledHouseCard columnWidth={150}>
       {randomHouses?.map((item, i) => (
         <Link key={i} to={`/boliger/${item.id}`}>
           <article>
