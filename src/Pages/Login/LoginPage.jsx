@@ -15,10 +15,9 @@ export const LoginPage = () => {
   const { loggedIn, username } = useLoginStore();
   const { userInfo } = useLoginStore();
   const {
-    register, // register input with validation
-    handleSubmit, // handle the form submit
+    register, // function to register input with validation
+    handleSubmit, // function to handle the form submit
     reset,
-    formState: { errors }, // form errors
   } = useForm();
 
   // Boolean state to show-hide the edit box via the toggle arrow function

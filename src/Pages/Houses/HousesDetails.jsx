@@ -24,22 +24,6 @@ const HousesDetails = () => {
   const [favoritesCount, setFavoritesCount] = useState(0);
   const [favorites, setFavorites] = useState([]);
 
-  // If user is logged in, it fetches favorites. Rerenders when loggedIn or favoritesCount changes
-  // to change appearance of favorite-icon
-  useEffect(() => {
-    if (loggedIn) {
-      const getData = async () => {
-        try {
-          const result = await appService.Get("favorites");
-          setFavorites(result.data.items);
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      getData();
-    }
-  }, [loggedIn, favoritesCount]);
-
   // fetch the house from the id in the url using useParams
   // and sets result to state variable
   useEffect(() => {
@@ -54,6 +38,22 @@ const HousesDetails = () => {
     getData();
   }, [id]);
 
+    // If user is logged in, it fetches favorites. Rerenders when loggedIn or favoritesCount changes
+  // to change appearance of favorite-icon
+  useEffect(() => {
+    if (loggedIn) {
+      const getData = async () => {
+        try {
+          const result = await appService.Get("favorites");
+          setFavorites(result.data.items);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      getData();
+    }
+  }, [loggedIn, favoritesCount]);
+  
   // posts a favorite onClick, takes the id as a parameter
   // adds to faveoritesCount to ensure a rerender of the favorite fetch
   const postFavorite = (home_id) => {

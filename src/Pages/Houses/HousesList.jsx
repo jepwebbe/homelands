@@ -34,29 +34,31 @@ export const HousesList = () => {
     }
   }, [loggedIn, favoritesCount]);
 
-  // fetches all the homes and sets to state
+  // uses regular fetch to get all the homes and sets to state
   // rerenders when a favorite has been toggled cf. dep. array
   // also adds a slug property
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const result = await appService.Get("homes");
-        for (const parent of result.data.items) {
-          parent.slug = slugify(parent.address, {
-            strict: true,
-            lower: true,
-            locale: "da",
-          });
-        }
-        setHouseList(result.data.items);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getData();
+    fetch("https://api.mediehuset.net/homelands/homes")
+      // Convert the Promise response to JSON
+      .then((response) => response.json())
+      // Handles the data returned by the previous .then() method
+      .then((data) => {
+        const newData = data.items.map((parent) => {
+          return {
+            ...parent,
+            slug: slugify(parent.address, {
+              strict: true,
+              lower: true,
+              locale: "da",
+            }),
+          };
+        });
+        setHouseList(newData);
+      })
+      .catch((error) => console.error(error));
   }, [favoritesCount]);
 
-  // Function to format the price to Danish
+  // Creates a new object to format the price to Danish
   const formatPrice = new Intl.NumberFormat("da-DK", {
     style: "currency",
     currency: "DKK",
