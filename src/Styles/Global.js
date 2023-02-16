@@ -5,7 +5,6 @@ import TrebucBd from "../assets/fonts/trebucbd.ttf";
 import TrebucBi from "../assets/fonts/trebucbi.ttf";
 import TrebucIt from "../assets/fonts/trebucit.ttf";
 
-
 // GlobalStyles for the styled-components that add the standard values site-wide
 export const GlobalStyles = createGlobalStyle`
 @font-face {
@@ -74,5 +73,10 @@ a {
 }
 header a, h1 {
     font-family: "Odibee";
+}
+@media (max-width: ${(props) => props.theme.breakpoints.m}) {
+    html {
+        font-size: 12px;
+    }
 }
 `;

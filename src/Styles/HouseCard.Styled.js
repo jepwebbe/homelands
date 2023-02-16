@@ -23,7 +23,7 @@ export const StyledHouseCard = styled.div`
       font-weight: normal;
     }
     p {
-      font-size: 1.15rem;
+      font-size: 1rem;
     }
     .marginBottom {
       margin-bottom: 0;
@@ -43,6 +43,8 @@ export const StyledHouseCard = styled.div`
       }
       .price {
         margin-left: auto;
+        font-size: 1.15rem;
+        font-weight: bold;
       }
       > div {
         background-color: ${(props) => props.theme.colors.green};
@@ -61,4 +63,16 @@ export const StyledHouseCard = styled.div`
   a {
     color: black;
   }
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10000;
+}
+  @media (max-width: ${(props) => props.theme.breakpoints.m}) {
+    grid-template-columns: repeat(
+    auto-fit,
+    minmax(200px, 1fr)
+  );
+} ;
 `;

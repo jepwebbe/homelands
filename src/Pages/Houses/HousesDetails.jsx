@@ -138,9 +138,9 @@ const HousesDetails = () => {
               </a>
             </div>
             <div>
-              {favorites?.find((item) => item.home_id === houseDetails.id) ? (
+              {loggedIn ? favorites?.find((item) => item.home_id === houseDetails.id) ? (
                 <AiFillHeart onClick={() => deleteFavorite(houseDetails.id)} />
-              ) : loggedIn ? (
+              ) : (
                 <AiOutlineHeart onClick={() => postFavorite(houseDetails.id)} />
               ) : (
                 <Link to="/login">

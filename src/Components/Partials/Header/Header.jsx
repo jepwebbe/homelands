@@ -5,7 +5,6 @@ import { StyledBg } from "./Bg.Styled";
 
 export const Header = () => {
   return (
-    <>
       <StyledHeader>
         <div className="navigation">
           <h1>HOMELANDS</h1>
@@ -17,6 +16,5 @@ export const Header = () => {
           <div className="triangleTwo"></div>
         </StyledBg>
       </StyledHeader>
-    </>
   );
 };

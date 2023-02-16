@@ -45,22 +45,16 @@ export const StyledNav = styled.nav`
     }
   }
   @media (max-width: ${(props) => props.theme.breakpoints.m}) {
-    button {
-      display: block;
-      background-color: transparent;
-      border: none;
-      padding: 1rem;
-      cursor: pointer;
-      svg {
-        font-size: 2rem;
-      }
-    }
+      grid-column: 2/ -1;
     ul {
       flex-direction: column;
       background: white;
       padding: 1rem;
       margin: 0;
-      width: 50vw;
+      min-width: 15rem;
+      li a {
+        color: black;
+      }
     }
   } ;
 `;

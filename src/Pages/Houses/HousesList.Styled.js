@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
 export const StyledHousesList = styled.section`
-padding: 0 ${props => props.theme.space.sidePadding};
-h2 {
+>h2 {
     grid-area: a;
+    padding: 0 ${props => props.theme.space.sidePadding};
 }
 >div {
     grid-area: b;

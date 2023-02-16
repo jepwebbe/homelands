@@ -16,7 +16,7 @@ const useGetApiDataFromEndpoint = (endpoint, key) => {
         }
       } catch (error) {
         console.error(error);
-      }
+      } 
     };
     renderData();
   }, [endpoint, key]);
