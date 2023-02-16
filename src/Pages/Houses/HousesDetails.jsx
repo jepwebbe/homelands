@@ -9,18 +9,18 @@ import floorplan from "../../assets/FloorplanIcon.png";
 import { useModalStore } from "./Modal/useModalStore";
 import Hero from "../Home/Hero/Hero";
 import { useLoginStore } from "../Login/Login/useLoginStore";
-// iFrame needs an Google API key to work
 
 const HousesDetails = () => {
   // Destructuring of hooks
-  const { setModalPayload, modalPayload } = useModalStore();
+  const { setModalPayload } = useModalStore();
   const { loggedIn } = useLoginStore();
   const { id } = useParams();
 
   // Setting up variables and setter functions for useState
   const [houseDetails, setHouseDetails] = useState({});
 
-  // only used to rerender fetch of favorites
+  // favoritesCount only used to rerender fetch of favorites
+  // favorites used to hold api data
   const [favoritesCount, setFavoritesCount] = useState(0);
   const [favorites, setFavorites] = useState([]);
 
@@ -40,7 +40,8 @@ const HousesDetails = () => {
     }
   }, [loggedIn, favoritesCount]);
 
-  // fetch the house from the id in the url using useParams and set to state variable
+  // fetch the house from the id in the url using useParams
+  // and sets result to state variable
   useEffect(() => {
     const getData = async () => {
       try {
@@ -53,24 +54,26 @@ const HousesDetails = () => {
     getData();
   }, [id]);
 
-  // posts a favorite onClick
+  // posts a favorite onClick, takes the id as a parameter
+  // adds to faveoritesCount to ensure a rerender of the favorite fetch
   const postFavorite = (home_id) => {
     const add = async () => {
       try {
-        const result = await appService.Create("favorites", { home_id });
-        setFavoritesCount(+1)
+        await appService.Create("favorites", { home_id });
+        setFavoritesCount(+1);
       } catch (error) {
         console.error(error);
       }
     };
     add();
   };
-  // removes favorite onClick
+  // removes favorite onClick, takes the id as a parameter
+  // subtracts from faveoritesCount to ensure a rerender of the favorite fetch
   const deleteFavorite = (home_id) => {
     const remove = async () => {
       try {
-        const result = await appService.Remove("favorites", home_id);
-        setFavoritesCount(-1)
+        await appService.Remove("favorites", home_id);
+        setFavoritesCount(-1);
       } catch (error) {
         console.error(error);
       }
@@ -126,21 +129,13 @@ const HousesDetails = () => {
               </button>
             </div>
             <div>
-              <IoMdPin
-                onClick={() =>
-                  setModalPayload(
-                    <iframe
-                      src={`https://www.google.com/maps/place?q=${
-                        houseDetails?.city + houseDetails?.address
-                      }`}
-                      width="600"
-                      height="450"
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                    ></iframe>
-                  )
-                }
-              />
+              <a
+                href={`https://www.google.com/maps/place/${houseDetails?.address},+${houseDetails?.city}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <IoMdPin />
+              </a>
             </div>
             <div>
               {favorites?.find((item) => item.home_id === houseDetails.id) ? (
