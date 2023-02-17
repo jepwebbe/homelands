@@ -15,8 +15,6 @@ export const StyledHouseCard = styled.div`
     .imagewrap {
       aspect-ratio: 16 / 9;
       overflow: hidden;
-      img {
-      }
     }
     h2 {
       font-size: 1.15rem;
