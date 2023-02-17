@@ -26,7 +26,7 @@ background-color: rgba(0,0,0,0.5);
     border-radius: 50%;
     position: absolute;
     right: 0.5rem;
-    top: 2rem;
+    top: 5vh;
     width: 2rem;
     height: 2rem;
     display: grid;

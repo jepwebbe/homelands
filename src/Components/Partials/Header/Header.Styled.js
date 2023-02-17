@@ -13,12 +13,15 @@ div.navigation {
   padding: 0 ${(props) => props.theme.space.sidePadding};
   padding-top: 1rem;
   h1 {
-    color: white;
     background-color: ${(props) => props.theme.colors.orange};
     padding: 1rem;
     border: 2px solid black;
     font-size: 4rem;
     margin: 0;
+    a {
+      color: white;
+
+    }
   }
 }
 button.burgerbutton {

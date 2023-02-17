@@ -9,6 +9,7 @@ import floorplan from "../../assets/FloorplanIcon.png";
 import { useModalStore } from "./Modal/useModalStore";
 import Hero from "../Home/Hero/Hero";
 import { useLoginStore } from "../Login/Login/useLoginStore";
+import axios from "axios";
 
 const HousesDetails = () => {
   // Destructuring of hooks
@@ -36,9 +37,20 @@ const HousesDetails = () => {
       }
     };
     getData();
+    // Uses axios patch to update number of click at every load of page (useEffect)
+    const postClick = async () => {
+      try {
+        const response = await axios.patch(
+          `https://api.mediehuset.net/homelands/homes/${id}`
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    postClick();
   }, [id]);
 
-    // If user is logged in, it fetches favorites. Rerenders when loggedIn or favoritesCount changes
+  // If user is logged in, it fetches favorites. Rerenders when loggedIn or favoritesCount changes
   // to change appearance of favorite-icon
   useEffect(() => {
     if (loggedIn) {
@@ -53,7 +65,7 @@ const HousesDetails = () => {
       getData();
     }
   }, [loggedIn, favoritesCount]);
-  
+
   // posts a favorite onClick, takes the id as a parameter
   // adds to faveoritesCount to ensure a rerender of the favorite fetch
   const postFavorite = (home_id) => {
@@ -138,10 +150,16 @@ const HousesDetails = () => {
               </a>
             </div>
             <div>
-              {loggedIn ? favorites?.find((item) => item.home_id === houseDetails.id) ? (
-                <AiFillHeart onClick={() => deleteFavorite(houseDetails.id)} />
-              ) : (
-                <AiOutlineHeart onClick={() => postFavorite(houseDetails.id)} />
+              {loggedIn ? (
+                favorites?.find((item) => item.home_id === houseDetails.id) ? (
+                  <AiFillHeart
+                    onClick={() => deleteFavorite(houseDetails.id)}
+                  />
+                ) : (
+                  <AiOutlineHeart
+                    onClick={() => postFavorite(houseDetails.id)}
+                  />
+                )
               ) : (
                 <Link to="/login">
                   <AiOutlineHeart />
@@ -155,6 +173,7 @@ const HousesDetails = () => {
             </p>
             <p>Udbetaling {houseDetails?.payout}</p>
             <p>Ejerudgift pr måned {houseDetails?.cost}</p>
+            <p>Kliks: {houseDetails?.num_clicks}</p>
           </div>
           <div>
             <p>Sagsnr.</p>
@@ -170,27 +189,32 @@ const HousesDetails = () => {
           </div>
           <div>
             <p>Kælder</p>
-            <span>{houseDetails?.floor_space}</span>
+            <span>{houseDetails?.basement_space}</span>
             <p>Byggeår</p>
-            <span>{houseDetails?.ground_space}</span>
+            <span>{houseDetails?.year_construction}</span>
             <p>Ombygget</p>
-            <span>{houseDetails?.num_rooms}</span>
+            <span>{houseDetails?.year_rebuilt}</span>
             <p>Energimærke</p>
-            <span>{houseDetails?.num_floors}</span>
+            <span>{houseDetails?.energy_label_name}</span>
             <p>Liggetid</p>
-            <span>{houseDetails?.id}</span>
+            <span>
+              {Math.floor(
+                (Date.now() / 1000 - houseDetails.date_stamp) / 86400
+              )}{" "}
+              dage
+            </span>
           </div>
           <div>
             <p>Kontantpris</p>
             <span>{houseDetails?.price}</span>
             <p>Udbetaling</p>
-            <span>{houseDetails?.ground_space}</span>
+            <span>{houseDetails?.payout}</span>
             <p>Brutto ex. ejerudgift</p>
-            <span>{houseDetails?.num_rooms}</span>
+            <span>{houseDetails?.gross}</span>
             <p>Netto ex. ejerudgift</p>
-            <span>{houseDetails?.num_floors}</span>
+            <span>{houseDetails?.net}</span>
             <p>Ejerudgift</p>
-            <span>{houseDetails?.id}</span>
+            <span>{houseDetails?.cost}</span>
           </div>
           <div>{houseDetails?.description}</div>
           <div>
