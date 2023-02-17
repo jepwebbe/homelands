@@ -1,46 +1,53 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const StyledAddReview = styled.form`
-display: grid;
-background-color: #333333;
-padding: 2rem 0;
->div {
-display: grid;
-grid-template-columns: 1fr 3fr 1fr;
-margin: 0 auto;
-gap: 0.5rem;
-}
-.title {
+  display: grid;
+  background-color: #333333;
+  padding: 2rem 0;
+  > div {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    margin: 0 auto;
+    gap: 0.5rem;
+  }
+  .title {
     grid-row: 1;
-}
-.stars {
+  }
+  .stars {
     grid-row: 2;
-}
-label {
+  }
+  label {
     color: white;
-    grid-column: 1 / 1 ;
-}
+    grid-column: 1 / 1;
+  }
 
-input, textarea {
+  input,
+  textarea {
     border: none;
     grid-column: 2 / 2;
-}
-input[type="submit"] {
+  }
+  input[type="submit"] {
     width: 80%;
     border: none;
     grid-column: 3 / 3;
     cursor: pointer;
-    background-color: #CCCCCC;
+    background-color: #cccccc;
     border-radius: 0.5rem;
-}
-input[type="submit"]:hover {
+  }
+  input[type="submit"]:hover {
     background-color: #666666;
     color: white;
-}
-div.thanks { 
+  }
+  div.user-message {
     display: block;
-    h4 {
-    color: white;
-    text-align: center;
-}}
-`
+    h4,
+    p,
+    p a {
+      color: white;
+      text-align: center;
+    }
+    p a {
+      text-decoration: underline;
+    }
+  }
+`;
