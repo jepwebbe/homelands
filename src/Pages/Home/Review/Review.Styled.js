@@ -36,17 +36,30 @@ export const StyledReview = styled.section`
       top: 0;
       z-index: 10;
       cursor: pointer;
+      transform: translateX(100%);
+      transition: transform 0.5s ease-in-out;
       svg {
         color: #666666;
         font-size: 3rem;
       }
     }
+
     form {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
     }
+  }
+  .add-review {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+    height: 100%;
+  }
+
+  .add-review.show, .hidebutton.show {
+    transform: translateX(0%);
   }
 `;

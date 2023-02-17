@@ -23,8 +23,7 @@ export const Review = () => {
   const ranTopReview =
     topReviews[Math.floor(Math.random() * topReviews.length)];
   // First convert the Unix timestamp
-  const time = ranTopReview?.created;
-  const date = new Date(time * 1000);
+  const date = new Date(ranTopReview?.created * 1000);
   const months = [
     "Januar",
     "Februar",
@@ -59,11 +58,13 @@ export const Review = () => {
             <IoIosArrowBack />
           </button>
         ) : (
-          <button className="hidebutton" onClick={handleClick}>
-            <RxCross2 />
+          <button className="hidebutton" style={{ transform: showAddReview ? 'translateX(0)' : 'translateX(100%)' }} onClick={handleClick}>
+            <RxCross2 className="slide-in show"/>
           </button>
         )}
-        {showAddReview && <AddReview />}
+        <div className="add-review" style={{ transform: showAddReview ? 'translateX(0)' : 'translateX(100%)' }}>
+          {showAddReview && <AddReview  className="slide-in show" />}
+        </div>
       </article>
     </StyledReview>
   );

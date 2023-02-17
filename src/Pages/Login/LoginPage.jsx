@@ -4,8 +4,8 @@ import Login from "./Login/Login";
 import { PageTwo } from "../../Styles/PageTemplate/PageTwo";
 import { StyledLoginPage } from "./LoginPage.Styled";
 import appService from "../../Components/App/Appservices/AppService";
-import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { EditComment } from "./EditComment";
 
 export const LoginPage = () => {
   const [allReviews, setAllReviews] = useState([]);
@@ -14,11 +14,6 @@ export const LoginPage = () => {
   // Destructuring of needed hooks
   const { loggedIn, username } = useLoginStore();
   const { userInfo } = useLoginStore();
-  const {
-    register, // function to register input with validation
-    handleSubmit, // function to handle the form submit
-    reset,
-  } = useForm();
 
   // Boolean state to show-hide the edit box via the toggle arrow function
   const [displayEdit, setDisplayEdit] = useState(false);
@@ -50,26 +45,6 @@ export const LoginPage = () => {
 
   // Updates the comment (currently not functional)
   // Posts postData to the endpoint w. the commentId (postData.Id)
-  const onSubmit = async (data) => {
-    const postData = {
-      content: data.comment,
-      active: true,
-      id: data.id,
-    };
-    try {
-      const response = await appService.Update(
-        "reviews",
-        postData.id,
-        postData
-      );
-      if (response.status) {
-        console.log(response.data);
-        reset();
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   // Deletes a given comment and sets it to a variable deleteCount
   // which onchange rerenders the fetch of comments
@@ -86,21 +61,23 @@ export const LoginPage = () => {
   const [favorites, setFavorites] = useState([]);
   useEffect(() => {
     if (loggedIn) {
-    const getData = async () => {
-      try {
-        const result = await appService.Get("favorites");
-        setFavorites(result.data.items);
-        console.log(result.data.items)
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getData();
-  }
+      const getData = async () => {
+        try {
+          const result = await appService.Get("favorites");
+          setFavorites(result.data.items);
+          console.log(result.data.items);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      getData();
+    }
   }, [loggedIn]);
 
   return (
-    <PageTwo title={loggedIn ? username + " er logget ind" : "Log ind på din profil" }>
+    <PageTwo
+      title={loggedIn ? username + " er logget ind" : "Log ind på din profil"}
+    >
       <StyledLoginPage>
         <h2>Administration</h2>
         {loggedIn ? (
@@ -134,28 +111,12 @@ export const LoginPage = () => {
                         </td>
                       </tr>
                       {displayEdit ? (
-                        <tr className="edit">
-                          <td>
-                            <form onSubmit={handleSubmit(onSubmit)}>
-                              <input
-                                type="hidden"
-                                {...register("id")}
-                                id="id"
-                                value={item.id}
-                              />
-                              <textarea
-                                value={item.content}
-                                type="text"
-                                {...register("comment", { required: true })}
-                              />
-                              <input
-                                className="submit"
-                                type="submit"
-                                value="Send"
-                              />
-                            </form>
-                          </td>
-                        </tr>
+                        <EditComment
+                        id={item.id}
+                        title={item.title}
+                        num_stars={item.num_stars}
+                        content={item.content}
+                        />
                       ) : null}
                     </React.Fragment>
                   ))}
@@ -164,11 +125,12 @@ export const LoginPage = () => {
             </section>
             <article>
               <h3>Favoritter</h3>
-              {favorites && favorites.map((fav, ix) => (
-                <Link key={ix} to={`/boliger/${fav.home_id}`}>
-                  <h4>{fav.address}</h4>
-                </Link>
-              ))}
+              {favorites &&
+                favorites.map((fav, ix) => (
+                  <Link key={ix} to={`/boliger/${fav.home_id}`}>
+                    <h4>{fav.address}</h4>
+                  </Link>
+                ))}
             </article>
           </>
         ) : (
