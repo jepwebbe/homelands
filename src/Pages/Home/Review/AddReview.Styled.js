@@ -37,5 +37,10 @@ input[type="submit"]:hover {
     background-color: #666666;
     color: white;
 }
-
+div.thanks { 
+    display: block;
+    h4 {
+    color: white;
+    text-align: center;
+}}
 `
